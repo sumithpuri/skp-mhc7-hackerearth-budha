@@ -25,7 +25,7 @@ https://github.com/sumithpuri
 <br>
 
 
-![Mphasis Hackathon Challenge, Season-07](https://drive.google.com/file/d/1Yd9PrtLiIVv7QBWgTs8HQFssL7K6Q6us/view?usp=sharing)
+![Mphasis Hackathon Challenge, Season-07](https://drive.google.com/uc?export=view&id=1Yd9PrtLiIVv7QBWgTs8HQFssL7K6Q6us)
 		    	
 
  <p align='center'><span style="font-size: 10px; color:blue">ALL COPYRIGHTS FOR THE ABOVE PUBLICLY AVAILABLE IMAGE OR PARTS OF THE IMAGE ARE WITH THEIR RESPECTIVE OWNERS, SOURCED/USED FROM GOOGLE SEARCH</span></p>
