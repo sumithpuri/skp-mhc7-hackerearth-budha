@@ -11,68 +11,54 @@
 	border-left-style: none;
 	border-left-width: 1px;
 }
-
 .auto-style3 {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 .auto-style5 {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	
 }
-
 .auto-style6 {
 	color: #0000FF;
 }
-
 .auto-style8 {
 	text-align: left;
 }
-
 .auto-style9 {
 	border: 1px solid #0000FF;
 	text-align: right;
 }
-
 .auto-style10 {
 	text-align: center;
 	border-right-style: none;
 	border-right-width: 1px;
 }
-
 .auto-style11 {
 	border: 1px solid #0000FF;
 	text-align: center;
 }
-
 .auto-style12 {
 	border: 1px solid #0000FF;
 	text-align: left;
 }
-
 .auto-style16 {
 	border-color: #FFFFFF;
 	border-width: 0;
 }
-
 .auto-style17 {
 	border: 0 solid #FFFFFF;
 	text-align: center;
 	background-color: #000000;
 }
-
 .auto-style21 {
 	border-style: solid;
 	border-width: 0;
 }
-
 .auto-style22 {
 	text-align: center;
 	border-right-style: none;
 	border-right-width: medium;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 .auto-style23 {
 	text-align: center;
 	border-left-style: none;
@@ -91,7 +77,6 @@
 	border-left-style: none;
 	border-left-width: 1px;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	
 	color: #FF0000;
 }
 .auto-style26 {
@@ -101,38 +86,83 @@
 </style>
 <script type="text/javascript">
 
+var threatFn, threatDn;
+
+function stopBudha() {
+
+	var xhttp = new XMLHttpRequest();
+	
+
+ 
+  	xhttp.onreadystatechange = function() {
+  	
+  		window.clearInterval(threatFn);
+	    window.clearInterval(threatDn);
+
+	    threatDetect=false;
+	    budhaActivity=false;
+	    engineStart=false;
+	    document.getElementById("leftImg").style.visibility='hidden';
+     	document.getElementById("leftText").style.visibility='hidden';    
+     	document.getElementById("rightImg").style.visibility='hidden';
+     	document.getElementById("rightText").style.visibility='hidden'; 
+     	document.getElementById("activityDiv").style.visibility='hidden'; 
+     	document.getElementById("threatsDiv").style.visibility='hidden'; 
+    };
+
+    alert("Stop Signal Sent to Budha Engine (Server)!");	    
+  
+    document.getElementById("startButton").disabled=false;
+    document.getElementById("stopButton").disabled=true;
+  
+    xhttp.open("GET", "/budha/budha-activity", true);
+    xhttp.send();
+}
+
+
+
 function startBudha() {
 
 	var xhttp = new XMLHttpRequest();
  
   	xhttp.onreadystatechange = function() {
+  	
+  	   if(engineStart==false) {
    
-	    window.setInterval(threatActivity, 3000);
-	    window.setInterval(threatDetection, 10000);
+	    	threatFn=window.setInterval(threatActivity, 3000);
+	    	threatDn=window.setInterval(threatDetection, 10000);
+	    	engineStart=true;
+	    }
   };
   
   document.getElementById("startButton").disabled=true;
+  document.getElementById("stopButton").disabled=false;
+
   
   xhttp.open("GET", "/budha/budha-activity", true);
   xhttp.send();
 }
 
-var threatDetect=false, budhaActivity=false;
+var threatDetect=false, budhaActivity=false, engineStart=false;
 function threatDetection() {
 
 
 	var xhttp = new XMLHttpRequest();
+	if(threatDetect==false) {
+			document.getElementById("rightImg").style.visibility='visible';
+			document.getElementById("rightText").style.visibility='visible';
+			  
+     	document.getElementById("threatsDiv").style.visibility='visible'; 
+
+			threatDetect=true;
+	    }
  
   	xhttp.onreadystatechange = function() {
    
     if (this.readyState == 4 && this.status == 200) {
     
  		
-		if(threatDetect==false) {
-			document.getElementById("rightImg").style.visibility='visible';
-			document.getElementById("rightText").style.visibility='visible';
-			threatDetect=true;
-	    }
+		
 
       var array = JSON.parse(xhttp.responseText);
       
@@ -162,17 +192,19 @@ function threatDetection() {
 function threatActivity() {
 
 	var xhttp = new XMLHttpRequest();
+	 if(budhaActivity==false) {
+			document.getElementById("leftImg").style.visibility='visible';
+			document.getElementById("leftText").style.visibility='visible';
+				document.getElementById("activityDiv").style.visibility='visible'; 
+			budhaActivity=true;
+	    }
  
   	xhttp.onreadystatechange = function() {
    
     if (this.readyState == 4 && this.status == 200) {
     
      
-	    if(budhaActivity==false) {
-			document.getElementById("leftImg").style.visibility='visible';
-			document.getElementById("leftText").style.visibility='visible';
-			budhaActivity=true;
-	    }
+	   
 
       var array = JSON.parse(xhttp.responseText);
       
@@ -201,97 +233,84 @@ function threatActivity() {
   xhttp.send();
 }
 </script>
-<meta
-	content="Mphasis Hackathon Challenge Season-07 @ HackerEarth - Budha : Mystery That is Data!"
-	name="description">
+<meta content="Mphasis Hackathon Challenge Season-07 @ HackerEarth - Budha : Mystery That is Data!" name="description">
 </head>
 
 <body style="margin: 0">
 
-	<div class="auto-style8">
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<table align="center" cellpadding="0" class="auto-style16"
-			style="width: 95%">
-			<tr>
-				<td class="auto-style10" style="height: 274px; width: 15%"><img
-					id="leftImg" alt="" height="270" src="images/giphy%20(1).gif" width="480" style="visibility:hidden;"></td>
-				<td class="auto-style17" colspan="2" rowspan="2"><img
-					alt="Brahmastra - Mphasis Hackathon Challenge Season 07"
-					class="auto-style21" height="104"
-					longdesc="Brahmastra - Mphasis Hackathon Challenge Season 07"
-					src="images/img2.jpg" width="900"></td>
-				<td class="auto-style2" style="width: 15%"><img
-					id="rightImg" alt="" height="270" src="images/giphy.gif" width="480" style="visibility:hidden;"></td>
-			</tr>
-			<tr>
-				<td class="auto-style24" style="height: 39px; width: 15%;visibility:hidden;" id="leftText">[DATA STREAM IN THE LAST 30 SECONDS]</td>
-				<td class="auto-style25" style="width: 15%;visibility :hidden;" id="rightText">[POSITIVE CASES SINCE SERVER
-					RESTART]</td>
-			</tr>
-			<tr>
-				<td class="auto-style22" rowspan="4">
-				<div id="activityDiv" style="text-align:right;height:400px; overflow:auto; background:#fff;font-size:10px;font-family:Verdana, Geneva, Tahoma, sans-serif;color:blue;font-weight:normal;">
-				</div>
-				</td>
-				<td class="auto-style11" colspan="2"><br>
-					<h2 class="auto-style26">Mphasis Hackathon Challenge,
-						Season-07, 2021 - HackerEarth</h2> <br class="auto-style3">
-				<br class="auto-style3"> <span class="auto-style3"><strong>Concept/Idea
-					</strong>: Budha-Mystery That is Data! | <strong>Team Name</strong> :
-						Brahmastra</span><br class="auto-style3"> <span class="auto-style3"><strong>[Technology
-							Area</strong> : Microservices, Predictive Analytics, Machine Learning<strong>]</strong></span><br
-					class="auto-style3"> <br>
-				<span class="auto-style5"><span class="auto-style6"><strong>Sumith
-								Kumar Puri</strong></span>, Enterprise Architect (Java/Java EE) | <span
-						class="auto-style6"><strong>Account</strong></span> - Fedex
-						(Strategic Accounts) <br>
-					<br></span><br>
-				<br></td>
-				<td class="auto-style23" rowspan="4">
-				<div id="threatsDiv"  style="text-align:left;height:400px; overflow:auto; background:#fff;font-size:10px;font-family:Verdana, Geneva, Tahoma, sans-serif;color:red;font-weight:normal;">
-				</div>
-				</td>
-			</tr>
-			<tr>
-				<td class="auto-style9"><br>
-				<span class="auto-style3">Select Use Case for Live Data
-						Monitoring :&nbsp;&nbsp; </span><br>
-				<br></td>
-				<td class="auto-style12">
-					<form method="post">
-						&nbsp;&nbsp; <select id="select1" name="select1" onchange="threatActivity()">
-							<option id="1" value="0"></option>
-							<option id="0" value="1">Suspected Terrorist Attack (Airrport Monitoring)
-							</option>
-							<option id="0" value="2">Suspected System Hacker (Log Analysis)</option>
-							<option id="0" value="3">Suspected Financial Fraud (Credit Card Frauds)</option>
-							<option id="0" value="4">Suspected Social Engineering (Hacktivism
-								Candidate)</option>
-						</select>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td class="auto-style11" colspan="2" style="height: 50px">
-				<form method="post">
-					<br><input name="startButton" id="startButton" type="button" value="Start Budha Engine" onclick="startBudha()"></form>
-				</td>
-			</tr>
-			<tr>
-				<td class="auto-style11" style="height: 90px;"><img
-					alt="Budha - Mystery That is Data!"
-					longdesc="Budha - Mystery That is Data!" src="images/img3.jpg"></td>
-				<td class="auto-style11" style="height: 90px"><img
-					alt="Budha - Mystery That is Data!"
-					longdesc="Budha - Mystery That is Data!" src="images/img6.jpg"></td>
-			</tr>
-		</table>
-		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</div>
+<div class="auto-style8">
+	<br/><br/><br/>
+	<table align="center" cellpadding="0" class="auto-style16" style="width: 95%">
+		<tr>
+			<td class="auto-style10" style="height: 274px; width: 15%">
+			<img id="leftImg" alt="" height="270" src="images/giphy%20(1).gif" style="visibility: hidden;" width="480"></td>
+			<td class="auto-style17" colspan="2" rowspan="2">
+			<img alt="Brahmastra - Mphasis Hackathon Challenge Season 07" class="auto-style21" height="104" longdesc="Brahmastra - Mphasis Hackathon Challenge Season 07" src="images/img2.jpg" width="900"></td>
+			<td class="auto-style2" style="width: 15%">
+			<img id="rightImg" alt="" height="270" src="images/giphy.gif" style="visibility: hidden;" width="480"></td>
+		</tr>
+		<tr>
+			<td id="leftText" class="auto-style24" style="height: 39px; width: 15%; visibility: hidden;">
+			[DATA STREAM - EVERY LAST 30 SECONDS]</td>
+			<td id="rightText" class="auto-style25" style="width: 15%; visibility : hidden;">
+			[POSITIVE CASES SINCE SERVER RESTART]</td>
+		</tr>
+		<tr>
+			<td class="auto-style22" rowspan="4">
+			<div id="activityDiv" style="text-align: right; height: 400px; overflow: auto; background: #fff; font-size: 10px; font-family: Verdana, Geneva, Tahoma, sans-serif; color: blue; font-weight: normal;">
+			</div>
+			</td>
+			<td class="auto-style11" colspan="2"><br>
+			<h2 class="auto-style26">Mphasis Hackathon Challenge, Season-07, 2021 
+			- HackerEarth</h2>
+			<br class="auto-style3"><br class="auto-style3">
+			<span class="auto-style3"><strong>Concept/Idea </strong>: Budha-Mystery 
+			That is Data! | <strong>Team Name</strong> : Brahmastra</span><br class="auto-style3">
+			<span class="auto-style3"><strong>[Technology Area</strong> : Microservices, 
+			Predictive Analytics, Machine Learning<strong>]</strong></span><br class="auto-style3">
+			<br><span class="auto-style5"><span class="auto-style6"><strong>Sumith 
+			Kumar Puri</strong></span>, Enterprise Architect (Java/Java EE) |
+			<span class="auto-style6"><strong>Account</strong></span> - Fedex (Strategic 
+			Accounts) <br><br></span><br><br></td>
+			<td class="auto-style23" rowspan="4">
+			<div id="threatsDiv" style="text-align: left; height: 400px; overflow: auto; background: #fff; font-size: 10px; font-family: Verdana, Geneva, Tahoma, sans-serif; color: red; font-weight: normal;">
+			</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="auto-style9"><br><span class="auto-style3">Select Use Case 
+			for Live Data Monitoring :&nbsp;&nbsp; </span><br><br></td>
+			<td class="auto-style12">
+			<form method="post">
+&nbsp;&nbsp; <select id="select1" name="select1" onchange="threatActivity()">
+				<option id="1" value="0"></option>
+				<option id="0" value="1">Suspected Terrorist Attack (Airrport Monitoring)
+				</option>
+				<option id="0" value="2">Suspected System Hacker (Log Analysis)
+				</option>
+				<option id="0" value="3">Suspected Financial Fraud (Credit Card 
+				Frauds)</option>
+				<option id="0" value="4">Suspected Social Engineering (Hacktivism 
+				Candidate)</option>
+				</select>
+			</form>
+			</td>
+		</tr>
+		<tr>
+			<td class="auto-style11" style="height: 50px">
+			<input id="startButton" name="startButton" onclick="startBudha()" style="background-color: green; vertical-align: middle;" type="button" value="Start Budha Engine">
+			</td>
+			<td class="auto-style11" style="height: 50px">
+			<input id="stopButton" name="stopButton" onclick="stopBudha()" style="background-color: red; vertical-align: middle;" type="button" value="Stop Budha Engine"></td>
+		</tr>
+		<tr>
+			<td class="auto-style11" style="height: 90px;">
+			<img alt="Budha - Mystery That is Data!" longdesc="Budha - Mystery That is Data!" src="images/img3.jpg"></td>
+			<td class="auto-style11" style="height: 90px">
+			<img alt="Budha - Mystery That is Data!" longdesc="Budha - Mystery That is Data!" src="images/img6.jpg"></td>
+		</tr>
+	</table>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
 
 </body>
 

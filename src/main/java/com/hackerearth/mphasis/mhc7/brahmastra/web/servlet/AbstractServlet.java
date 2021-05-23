@@ -43,7 +43,8 @@ public class AbstractServlet extends HttpServlet {
 	
 	public static void initThread(){
 		synchronized (THREAD_STARTED) {
-			if(THREAD_STARTED ==false){
+			if(THREAD_STARTED==false){
+				BudhaDataLoaderThread.IS_BUDHA_ENGINE_STARTED=true;
 				BudhaDataLoaderThread dataLoaderThread=new BudhaDataLoaderThread();
 				dataLoaderThread.start();
 				THREAD_STARTED =true;

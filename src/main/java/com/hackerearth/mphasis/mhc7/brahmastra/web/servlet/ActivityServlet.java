@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.hackerearth.mphasis.mhc7.brahmastra.biz.vo.BudhaEvent;
+import com.hackerearth.mphasis.mhc7.brahmastra.data.BudhaDataforDataLoader;
 import com.hackerearth.mphasis.mhc7.brahmastra.data.loader.BudhaDataLoaderThread;
 
 /**
@@ -54,6 +55,15 @@ public class ActivityServlet extends AbstractServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
+		Integer budhaEngineSignal = (Integer) req.getAttribute("budhaEngine");
+		if(budhaEngineSignal != null && budhaEngineSignal==0) {
+			
+			// Send Shutdown Signal
+			BudhaDataLoaderThread.IS_BUDHA_ENGINE_STARTED=false;
+		}
+		
+		
 		// TODO Respond Activity Event List Present in StoredList as JSON
 		// Creating ArrayList
 		initThread();
@@ -65,6 +75,8 @@ public class ActivityServlet extends AbstractServlet {
 			}
 			al.add(ev);
 		}
+		
+		
 		ObjectMapper mapper = new ObjectMapper();
 		resp.setContentType("application/json");
 		resp.addHeader("Access-Control-Allow-Origin", "*");

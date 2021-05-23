@@ -38,6 +38,8 @@ import com.hackerearth.mphasis.mhc7.brahmastra.data.BudhaDataforDataLoader;
  */
 public class BudhaDataLoaderThread extends Thread {
 	
+	public static boolean IS_BUDHA_ENGINE_STARTED=false;
+	
 	private int usecase;
 	
 
@@ -195,7 +197,7 @@ public class BudhaDataLoaderThread extends Thread {
 	public void run() {
 
 		// TODO FIXME Commented Code Provided Here is to Facilitate JSON/Servlet (User Interface)
-		while(true) {
+		while(IS_BUDHA_ENGINE_STARTED) {
 			
 			try {
 				// 1000 Records Per Minute
