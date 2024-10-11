@@ -1,7 +1,7 @@
 # Budha (Mphasis Hackathon Challenge, Season-07/2021)
 Code for the Team : Brahmastra [Microservices, Predictive Analytics, Machine Learning] 
 <br>
-MIT License, Copyright (c) 2018-19, <a href="https://www.techcto.online/">Sumith Kumar Puri</a><br>
+MIT License, Copyright (c) 2018-19, <a href="http://www.techcto.online/">Sumith Kumar Puri</a><br>
 [Note] Mphasis Internal Hackathon 2021, Season-07 (Finalist, Rank #07/106, Track : Microservices, Analytics)<br>
 https://github.com/sumithpuri 
 <br>
